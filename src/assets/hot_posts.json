@@ -1,0 +1,24 @@
+[
+    {
+      "department": "英文系",
+      "user": "abc123",
+      "date": "3天前",
+      "title": "測試文章標題",
+      "content": "測試內文\n\n換行後\n再插一個圖片\n![img src='logo.png' width='100']你好 ![img src='test.png' width='600']",
+      "likes": 10358,
+      "liked": false,
+      "comments": 1004,
+      "shares": 356
+    },
+    {
+      "department": "設計系",
+      "user": "Zxcv121536",
+      "date": "3天前",
+      "title": "文章2",
+      "content": "測試內文002\n沒有圖片\n換行後\n",
+      "likes": 6778,
+      "liked": true,
+      "comments": 104,
+      "shares": 215
+    }
+]

@@ -1,0 +1,37 @@
+# workflow名稱
+name: cd
+
+# action觸發時機
+on: [
+  push,
+  pull_request, 
+  workflow_dispatch # 允許在Actions Tab手動觸發
+]
+
+# workflow 可以由一個或多個jobs依序或平行執行
+jobs:
+  # job 定義
+  build:
+    # job 執行環境
+    runs-on: ubuntu-latest
+
+    # job 裡要執行的一系列 tasks
+    steps:
+      # Checksout至$GITHUB_WORKSPACE下的repo 
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # 安裝套件
+      - name: Install dependencies
+        run: npm install
+
+      # 打包檔案
+      - name: Generate
+        run: npm run build
+
+      # 將./dist目錄部署到gh-page branch上
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.COMMIT_SECRET }}
+          publish_dir: ./dist
