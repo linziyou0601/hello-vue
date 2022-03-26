@@ -1,7 +1,7 @@
 <template>
   <div class="about_hot">
     <PostDialog :post="currentPost" />
-    <div class="row row-cols-1 row-cols-md-3 g-2">
+    <div class="row row-cols-1 row-cols-md-4 g-2">
       <div class="col" v-for="(post, index) in posts" :key="index">
         <div class="card m-2">
           <div
@@ -39,6 +39,7 @@
               v-show="post.coverimg"
               :src="post.coverimg"
               class="img-fluid"
+              style="width: 100%"
             />
           </div>
           <div class="card-footer bg-transparent py-3">

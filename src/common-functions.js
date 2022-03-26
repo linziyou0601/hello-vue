@@ -10,12 +10,21 @@ const parseContent = (post) => {
   let flag = false;
   post.content = post.content.replaceAll(/\n/gi, "<br>");
   post.content = post.content.replaceAll(
-    /!\[img src='[^\]]*' [^\]]*\]/gi,
+    /!\[img src='[^\]]*'[^\]]*\]/gi,
     (match) => {
-      const imagePath = match.match(/src='([^']*)'/i)[1] ?? "";
-      const width = match.match(/width='([^']*)'/i)[1] ?? "";
-      const image = require(`@/assets/${imagePath}`);
-      if (imagePath !== "" && !flag) post.coverimg = image;
+      const imgSrcMatches = match.match(/src='([^']*)'/i)
+      const imagePath = imgSrcMatches ? imgSrcMatches[1] : "";
+      const imgWidthMatches = match.match(/src='([^']*)'/i)
+      const width = imgWidthMatches ? imgWidthMatches[1] : "";
+      let image = "";
+      if (imagePath!=="") {
+        try {
+          image = require(`@/assets/${imagePath}`);
+        } catch (error) {
+          image = imagePath;
+        }
+        if (!flag) post.coverimg = image;
+      }
       return `<img src="${image}" width="${width}" class="img-fluid" />`;
     }
   );
